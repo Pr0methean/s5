@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 import java.util.Collection;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,14 @@ public class TimeZoneServiceApplication {
 	}
 	
 	@RequestMapping(value="/", method = { RequestMethod.POST, RequestMethod.GET })
-	public RedirectView root() { return new RedirectView("/swagger-ui.html"); }
+	public RedirectView root() { 
+		return new RedirectView("/swagger-ui.html");
+	}
+	
+	@RequestMapping(value="/health", method = { RequestMethod.GET })
+	public Health health() {
+		return Health.up().build();		
+	}
 	
 	@RequestMapping(value="/getTimeZoneOffset", method = { RequestMethod.POST, RequestMethod.GET })
 	public String getTimeZoneOffset(@RequestParam(name="dateTime") String dateTime, @RequestParam(name="location") String location) {
@@ -44,7 +52,7 @@ public class TimeZoneServiceApplication {
 	}
 	
 	@Bean
-    public Docket api() { 
+	public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();                                           
     }
