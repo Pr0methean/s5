@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  tz:
+    image: kubaseai/s5:latest
+    ports:
+      - "9091:8080"
+    deploy:
+      mode: global
+#      replicas: 2
