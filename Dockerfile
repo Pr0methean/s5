@@ -1,5 +1,5 @@
 # Version: 0.1
-FROM adoptopenjdk/openjdk9-openj9:latest
+FROM adoptopenjdk/openjdk11-openj9:latest
 MAINTAINER Jakub Jozwicki jakub.jozwicki@gmail.com
 COPY target/TimeZoneService-0.0.1-SNAPSHOT.jar /tmp/
 COPY src/main/resources/application.properties /tmp/
